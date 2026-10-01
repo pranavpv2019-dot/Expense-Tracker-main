@@ -1,0 +1,124 @@
+{% extends 'base1.html' %}
+
+{% block title %}Register - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="bg-image"></div>
+
+<div class="bg-text">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container" style="margin-bottom:15px;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+
+                                <div class="card-header">
+                                    <h1 class="text-center font-weight-light my-4">
+                                        Personal Expense Tracker - Create Account
+                                    </h1>
+                                </div>
+
+                                <div class="card-body">
+                                    <form action="/handleSignup/" method="post">
+                                        {% csrf_token %}
+
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>User Name</label>
+                                                    <input class="form-control py-4" name="uname" type="text" placeholder="Enter User Name" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input class="form-control py-4" name="fname" type="text" placeholder="Enter first name"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input class="form-control py-4" name="lname" type="text" placeholder="Enter last name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input class="form-control py-4" name="email" type="email" placeholder="Enter email address" required/>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Profession</label>
+                                                    <select name="profession" class="form-control">
+                                                        <option>Employee</option>
+                                                        <option>Business</option>
+                                                        <option>Student</option>
+                                                        <option>Other</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Income</label>
+                                                    <input class="form-control py-4" name="income" type="text" placeholder="Income" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Savings</label>
+                                                    <input class="form-control py-4" name="Savings" type="text" placeholder="Amount to be saved" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input class="form-control py-4" name="pass1" type="password" placeholder="Enter password" minlength="8" maxlength="20" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Confirm Password</label>
+                                                    <input class="form-control py-4" name="pass2" type="password" placeholder="Confirm password" minlength="8" maxlength="20" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-4 mb-0">
+                                            <button type="submit" class="btn btn-primary btn-block mt-2">Create User</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="card-footer text-center">
+                                    <div class="small">
+                                        <a href="/">Have an account? Go to login</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+{% endblock %}

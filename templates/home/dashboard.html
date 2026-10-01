@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Dashboard</title>
+
+    <!-- Bootstrap & DataTables CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; }
+
+        #layoutSidenav { display: flex; min-height: 100vh; }
+
+        #layoutSidenav_nav {
+            width: 250px;
+            background: #343a40;
+            color: #fff;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        #layoutSidenav_nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        #layoutSidenav_nav a:hover { background: #495057; }
+
+        #layoutSidenav_content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .sb-sidenav-menu-heading {
+            padding: 15px 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #adb5bd;
+        }
+
+        .sb-sidenav-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .dashboard-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .dashboard-card h5 { font-weight: 700; }
+        .dashboard-card p { font-weight: 700; font-size: 1.5rem; }
+
+        .chart-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        /* ✅ MENU BUTTON */
+        .menu-btn {
+            display: none;
+            background: #343a40;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+        }
+
+        /* ✅ MOBILE FIX */
+        @media (max-width: 768px) {
+
+            #layoutSidenav_nav {
+                position: fixed;
+                left: -250px;
+                top: 0;
+                height: 100%;
+                z-index: 1000;
+            }
+
+            #layoutSidenav_nav.active {
+                left: 0;
+            }
+
+            #layoutSidenav_content {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ✅ MENU BUTTON -->
+<button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
+
+<div id="layoutSidenav">
+
+    <!-- Sidebar -->
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav">
+            <div class="sb-sidenav-menu">
+                <div class="nav flex-column">
+
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="/index"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link" href="/profile"><i class="fas fa-user"></i> Profile</a>
+
+                    <div class="sb-sidenav-menu-heading">Addons</div>
+                    <a class="nav-link" href="/info"><i class="fas fa-table"></i> Yearly Record</a>
+                    <a class="nav-link" href="/tables"><i class="fas fa-table"></i> History</a>
+
+                </div>
+            </div>
+
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                {{request.user.username}}
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+
+                <h1 class="mt-4 mb-4">Expense Dashboard</h1>
+
+                <a href="{% url 'add_recurring' %}" class="btn btn-warning mb-4">
+                    <i class="fas fa-sync-alt"></i> Add Recurring Expense
+                </a>
+
+                <!-- Summary Cards -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="dashboard-card">
+                            <h5>Total Expense</h5>
+                            <p>{{ total_expense }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dashboard-card">
+                            <h5>Total Income</h5>
+                            <p>{{ total_income }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dashboard-card">
+                            <h5>Current Balance</h5>
+                            <p>{{ current_income }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="chart-container mt-4">
+                    <h5 class="mb-3">Full Transactions</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Category</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for info in page_obj %}
+                                <tr>
+                                    <td>{{ info.add_money }}</td>
+                                    <td>{{ info.quantity }}</td>
+                                    <td>{{ info.Category }}</td>
+                                    <td>{{ info.Date }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</div>
+
+<!-- ✅ JAVASCRIPT -->
+<script>
+function toggleMenu() {
+    document.getElementById("layoutSidenav_nav").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'addmoney.css' %}">
+    <title>My Wallet</title>
+</head>
+<body>
+
+<div class="bg-text">
+<div class="container2">
+
+<h1 style="text-align:center;">My Wallet</h1>
+
+<form method="post" action="/addmoney_submission/">
+    {% csrf_token %}
+
+    <!-- Income / Expense -->
+    <div>
+        <p><strong>What do you want to add?</strong></p>
+
+        <label>
+            <input type="radio" name="add_money" value="Expense" checked required>
+            Expense
+        </label>
+
+        <label style="margin-left:20px;">
+            <input type="radio" name="add_money" value="Income" required>
+            Income
+        </label>
+    </div>
+
+    <br>
+
+    <!-- Amount -->
+    <div>
+        <label>Amount:</label><br>
+        <input type="number" name="quantity" min="1" required>
+    </div>
+
+    <br>
+
+    <!-- Date -->
+    <div>
+        <label>Date:</label><br>
+        <input type="date" name="Date" required>
+    </div>
+
+    <br>
+
+    <!-- Category -->
+    <div>
+        <label>Category:</label><br>
+        <select name="Category" required>
+            <!-- Expense Categories -->
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Necessities">Necessities</option>
+            <option value="Entertainment">Entertainment</option>
+
+            <!-- Income Categories -->
+            <option value="Salary">Salary</option>
+            <option value="Business">Business</option>
+
+            <option value="Others">Others</option>
+        </select>
+    </div>
+
+    <br>
+
+    <!-- Info -->
+    <p style="color:red; font-size:14px;">
+        ⚠ Monthly expense limit is ₹20,000.  
+        An email alert will be sent if exceeded.
+    </p>
+
+    <br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</div>
+</div>
+
+</body>
+</html>

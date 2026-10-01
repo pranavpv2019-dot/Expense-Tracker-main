@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Monthly Expense</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { border-radius: 10px; }
+        .chart-container { height: 350px; }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/index">Dashboard</a>
+</nav>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Monthly Expense</h2>
+
+    {% for message in messages %}
+    <div class="alert alert-warning">{{ message }}</div>
+    {% endfor %}
+
+    <div class="row">
+
+        <!-- Chart -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">Monthly Chart</div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">Monthly Summary</div>
+                <div class="card-body">
+
+                    <p><strong>Amount to be saved:</strong> ₹{{ target_savings }}</p>
+
+                    <p><strong>Amount spent:</strong> ₹{{ total_expense }}</p>
+
+                    <p><strong>Amount earned:</strong> ₹{{ total_income }}</p>
+
+                    <p><strong>Amount saved:</strong> ₹{{ total_saved }}</p>
+
+                    <p><strong>Target not achieved:</strong> ₹{{ target_shortage }}</p>
+
+                    <p><strong>Amount spent more than income:</strong> ₹{{ extra_spent }}</p>
+
+                    <p><strong>Remaining savings:</strong> ₹{{ remaining_savings }}</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Expense', 'Income'],
+        datasets: [{
+            data: [{{ total_expense }}, {{ total_income }}],
+            backgroundColor: ['#dc3545', '#28a745']
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+</script>
+
+</body>
+</html>
