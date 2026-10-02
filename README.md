@@ -1,23 +1,33 @@
-# Django-based Expense Tracker
 
-A simple, efficient, and intuitive expense tracker application built with Django to help users manage and track their expenses. It includes features like user authentication, expense categorization, profile management, and detailed reporting with data visualization.
+### Personal Expense Tracker 💰
 
-## Key Features
-- **User Authentication**: Sign up, login, and manage user profiles.
-- **Expense Tracking**: Add, edit, and delete expenses categorized by type (e.g., Food, Transport, etc.).
-- **Category Management**: Manage and assign categories to expenses.
-- **Reporting**: Generate expense reports based on selected timeframes (daily, monthly, yearly).
-- **Data Visualization**: Visualize expenses using charts and graphs.
+A Django-based web application for managing personal finances. Users can track income and expenses, monitor balances, analyze spending with charts, manage recurring expenses, receive email alerts, scan bills using OCR, and download financial reports in Excel format. The project also includes user authentication and an admin panel for efficient data management.
 
-## Technologies Used
-- **Django** (Backend Framework)
-- **Python** (Programming Language)
-- **SQLite** (Database)
-- **HTML/CSS** (Frontend)
-- **JavaScript** (Dynamic Elements)
-- **Matplotlib** (Data Visualization)
-- **Django Rest Framework** (For potential API development)
-- **JWT** (Authentication)
+### Key Features
+
+- 🔐 User Registration and Secure Login
+- 💰 Income and Expense Management
+- 📊 Expense Analysis with Charts
+- 🔄 Recurring Expense Management
+- 📧 Email Alerts for High Spending
+- 🧾 OCR-Based Bill Scanning
+- 📥 Excel Report Download
+- 📜 Expense History Tracking
+- 👤 User Profile Management
+- 🛠️ Admin Panel for Data Management
+- 📱 User-Friendly Web Interface
+
+### Technologies Used
+
+- Frontend: HTML, CSS, JavaScript
+- Backend: Python, Django
+- Database: SQLite
+- OCR: Tesseract OCR
+- Data Visualization: Chart.js
+- Email Service: Django Email Backend
+- Data Export: Excel / OpenPyXL
+- Development Tools: VS Code, Git, GitHub
+
 
 ## Installation
 
@@ -26,7 +36,8 @@ Follow these steps to set up the project locally:
 ### 1. Clone the Repository
 Clone the repository to your local machine:
 ```bash
-git clone (https://github.com/gauravdev01/Expense-Tracker)
+git clone https://github.com/pranavpv2019-dot/Expense-Tracker-main.git
+cd Expense-Tracker-main
 cd expense-tracker
 ```
 ### 2. Create a Virtual Environment (Optional but recommended)
