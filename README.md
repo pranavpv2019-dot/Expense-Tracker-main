@@ -74,22 +74,3 @@ The application should now be accessible at http://127.0.0.1:8000/
 
 **Admin Panel:** Access the Django admin panel at http://127.0.0.1:8000/admin/ using the superuser credentials created earlier.
 
-Login Form:
-![image](https://github.com/gauravdev01/Expense-Tracker/assets/109756079/fd0af81e-2642-41d6-95bc-2e3e0d16785e)
-
-Dashboard:
-![image](https://github.com/gauravdev01/Expense-Tracker/assets/109756079/a065a8d2-ac76-4794-bf7e-91e39b871cf9)
-
-![image](https://github.com/gauravdev01/Expense-Tracker/assets/109756079/7d88987f-f3f8-4860-a282-4d6acf2767d2)
-
-Monthly Expense Page:
-
-![image](https://github.com/gauravdev01/Expense-Tracker/assets/109756079/144d7909-36ef-4416-8444-d21ffaad1a0b)
-
-History Page:
-
-![image](https://github.com/gauravdev01/Expense-Tracker/assets/109756079/3b573e71-1ca1-4ec7-9131-7914ea52c324)
-
-Summary
-
-I have successfully created the expense tracker project in python. We learned a variety of concepts while making this project.
